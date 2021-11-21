@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>使用Hexo发布一篇文章</title>
+      <link href="/2021/11/20/fa-bu-wen-zhang-liu-cheng/"/>
+      <url>/2021/11/20/fa-bu-wen-zhang-liu-cheng/</url>
+      
+        <content type="html"><![CDATA[<h2 id="新建一篇文章"><a href="#新建一篇文章" class="headerlink" title="新建一篇文章"></a>新建一篇文章</h2><p>1、在hexo博客目录下，进入Git Bash命令窗口中，输入以下命令：</p><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"我的第一篇博客文章"</span></code></pre><p>2、在博客目录下的/source/_posts/ 文件夹下，就可以看到已经生成了标题为(我的第一篇博客文章.md)的博客文件，在该文件中编辑自己的博客文章即可。</p><p><strong>注意：Hexo 发布的文章是 Markdown 格式的文件，需要使用 Markdown 语法进行编写。</strong></p><p>Markdown 语法自查：<a href="https://markdown.com.cn/">Markdown 官方教程</a></p><hr><h2 id="文章-Front-matter-配置"><a href="#文章-Front-matter-配置" class="headerlink" title="文章 Front-matter 配置"></a>文章 Front-matter 配置</h2><p>Front-matter 选项中的所有内容均为非必填的。但是建议至少填写 title 和 date 的值。</p><h3 id="基本配置示例"><a href="#基本配置示例" class="headerlink" title="基本配置示例"></a>基本配置示例</h3><pre class=" language-markdown"><code class="language-markdown">title: 使用Hexo发布一篇文章date: 2021-11-20 21：30：00author: Tulongimg: /source/images/xxx.jpgsummary: 记录了Hexo发布一篇文章的一般流程tags:<span class="token list punctuation">-</span> Hexo<span class="token list punctuation">-</span> Markdowncategories: 博客</code></pre><h3 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h3><p>参见：<a href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md#%E6%96%87%E7%AB%A0-front-matter-%E4%BB%8B%E7%BB%8D">Front-matter 选项详解</a></p><hr><h2 id="用-Markdown-语法编写正文部分"><a href="#用-Markdown-语法编写正文部分" class="headerlink" title="用 Markdown 语法编写正文部分"></a>用 Markdown 语法编写正文部分</h2><p>像这样：<br><img src="0.png" alt="示例"></p><h3 id="在文章中插入图片的方法"><a href="#在文章中插入图片的方法" class="headerlink" title="在文章中插入图片的方法"></a>在文章中插入图片的方法</h3><p><em><strong>1. 在本地引用</strong></em></p><p>绝对路径：当Hexo项目中只用到少量图片时，可以将图片统一放在 source/images 文件夹中，通过markdown语法访问它们。这种方式引入的图片既可以在首页内容中访问到，也可以在文章正文中访问到。像下面这样引用：</p><p><code>![图片alt](/images/image.jpg "图片title")</code></p><p>相对路径：图片还可以放在文章自己的文件夹中。将 _config.yml 文件中的配置项 post_asset_folder 设为 true 后，执行命令<code>$ hexo new post_name</code>，在 source/_posts 中会生成文章 post_name.md 和同名文件夹 post_name 。将图片资源放在 post_name 中，文章就可以使用相对路径引用图片资源了。像下面这样引入：</p><p><code>![图片alt](image.jpg)</code></p><p>这样引入的图片只能在文章中显示，但无法在首页中正常显示。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。像这样：</p><p><code>{% asset_img image.jpg This is an image %}</code></p><p><em><strong>2. CDN 引用</strong></em></p><p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。比如 Cloudinary 提供的图片 CDN 服务，在 Cloudinary 中上传图片后，会生成对应的 url 地址，将地址直接拿来引用即可。</p><hr><h2 id="启动服务器，本地测试"><a href="#启动服务器，本地测试" class="headerlink" title="启动服务器，本地测试"></a>启动服务器，本地测试</h2><p><code>$ hexo server</code></p><hr><h2 id="生成静态文件并部署到-GitHub-上"><a href="#生成静态文件并部署到-GitHub-上" class="headerlink" title="生成静态文件并部署到 GitHub 上"></a>生成静态文件并部署到 GitHub 上</h2><p>想要发布的文章在本地预览无误后，在 Git Bash 命令窗口依次执行如下命令：</p><p><code>$ hexo clean</code></p><p><code>$ hexo generate</code></p><p><code>$ hexo deploy</code></p><p>执行完毕后在浏览器访问自己的博客域名，即可看到刚才发布的文章。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的第一篇博客文章</title>
+      <link href="/2021/11/17/wo-de-di-yi-pian-bo-ke-wen-zhang/"/>
+      <url>/2021/11/17/wo-de-di-yi-pian-bo-ke-wen-zhang/</url>
+      
+        <content type="html"><![CDATA[<p>javascript是一门充满活力、简单易用的语言，又是一门具有许多复杂微妙技术的语言。即使是经验丰富的javascript开发者，如果没有认真学习的话，也无法真正理解它们，这就是javascript的矛盾之处。由于javascript不必理解就可以使用，因此通常来说很难真正理解语言本身，这就是我们面临的挑战。不满足于只是让代码正常工作，而是想要弄清楚为什么，勇于挑战这条崎岖颠簸的少有人走的路，拥抱整个javascript…</p><span id="more"></span><p>后面的内容在首页不显示，只显示到这里<!--more--></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2021/11/17/hello-world/"/>
+      <url>/2021/11/17/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
