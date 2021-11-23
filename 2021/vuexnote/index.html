@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="使用Hexo发布一篇文章, 梦开始的地方">
-    <meta name="description" content="记录了Hexo发布一篇文章的一般流程">
+    <meta name="keywords" content="VuexNote, 梦开始的地方">
+    <meta name="description" content="Vuex 学习笔记">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>使用Hexo发布一篇文章 | 梦开始的地方</title>
+    <title>VuexNote | 梦开始的地方</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/pinkheart.ico">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -267,12 +267,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用Hexo发布一篇文章</h1>
+                    <h1 class="description center-align post-title">VuexNote</h1>
                 </div>
             </div>
         </div>
@@ -388,12 +388,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
-                            </a>
-                        
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
+                            <a href="/tags/Vuex/">
+                                <span class="chip bg-color">Vuex</span>
                             </a>
                         
                     </div>
@@ -404,8 +400,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                博客
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
                             </a>
                         
                     </div>
@@ -417,7 +413,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-20
+                    2021-11-22
                 </div>
                 
 
@@ -426,14 +422,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    673
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -448,46 +444,222 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="新建一篇文章"><a href="#新建一篇文章" class="headerlink" title="新建一篇文章"></a>新建一篇文章</h2><p>1、在hexo博客目录下，进入Git Bash命令窗口中，输入以下命令：</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"我的第一篇博客文章"</span>
+                <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>​        在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
+<h3 id="2-何时使用？"><a href="#2-何时使用？" class="headerlink" title="2.何时使用？"></a>2.何时使用？</h3><p>​     多个组件需要共享数据时</p>
+<h3 id="3-工作原理图"><a href="#3-工作原理图" class="headerlink" title="3.工作原理图"></a>3.工作原理图</h3><p>   <img src="vuex.png" alt="Vuex 原理图（来源于官网）"></p>
+<h3 id="4-搭建vuex环境"><a href="#4-搭建vuex环境" class="headerlink" title="4.搭建vuex环境"></a>4.搭建vuex环境</h3><ol>
+<li><p>创建文件：<code>src/store/index.js</code></p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入Vue核心库</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token comment" spellcheck="true">//引入Vuex</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token comment" spellcheck="true">//应用Vuex插件</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">//准备actions对象——响应组件中用户的动作</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//准备mutations对象——修改state中的数据</span>
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//准备state对象——保存具体的数据</span>
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//创建并暴露store</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    actions<span class="token punctuation">,</span>
+    mutations<span class="token punctuation">,</span>
+    state
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
-<p>2、在博客目录下的/source/_posts/ 文件夹下，就可以看到已经生成了标题为(我的第一篇博客文章.md)的博客文件，在该文件中编辑自己的博客文章即可。</p>
+</li>
+<li><p>在<code>main.js</code>中创建vm时传入<code>store</code>配置项</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入store</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span>
+
+<span class="token comment" spellcheck="true">//创建vm</span>
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    el<span class="token punctuation">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+    render<span class="token punctuation">:</span> h <span class="token operator">=</span><span class="token operator">></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    store
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ol>
+<h3 id="5-基本使用"><a href="#5-基本使用" class="headerlink" title="5.基本使用"></a>5.基本使用</h3><ol>
+<li><p>初始化数据、配置<code>actions</code>、配置<code>mutations</code>，操作文件<code>store.js</code></p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入Vue核心库</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token comment" spellcheck="true">//引入Vuex</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token comment" spellcheck="true">//引用Vuex</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">//响应组件中的dispatch，传入的第一个参数context有commit,state,dispatch等属性</span>
+    <span class="token function">jia</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'JIA'</span><span class="token punctuation">,</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">//执行mutate，改变state中的状态</span>
+    <span class="token function">JIA</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span>value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        state<span class="token punctuation">.</span>sum <span class="token operator">+</span><span class="token operator">=</span> value
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//初始化数据</span>
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+   sum<span class="token punctuation">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//创建并暴露store</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    actions<span class="token punctuation">,</span>
+    mutations<span class="token punctuation">,</span>
+    state<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li><p>组件中读取vuex中的数据：<code>this.$store.state.sum</code></p>
+</li>
+<li><p>组件中修改vuex中的数据：<code>this.$store.dispatch('action中的方法名',数据)</code> 或 <code>this.$store.commit('mutations中的方法名',数据)</code></p>
 <blockquote>
-<p>注意：Hexo 发布的文章是 Markdown 格式的文件，需要使用 Markdown 语法进行编写。</p>
+<p> 备注：若没有网络请求或其他业务逻辑，组件中也可以直接commit，即不写<code>dispatch</code>，直接写<code>commit</code></p>
 </blockquote>
-<p>Markdown 语法自查：<a target="_blank" rel="noopener" href="https://markdown.com.cn/">Markdown 官方教程</a></p>
-<hr>
-<h2 id="文章-Front-matter-配置"><a href="#文章-Front-matter-配置" class="headerlink" title="文章 Front-matter 配置"></a>文章 Front-matter 配置</h2><p>Front-matter 选项中的所有内容均为非必填的。但是建议至少填写 title 和 date 的值。</p>
-<h3 id="基本配置示例"><a href="#基本配置示例" class="headerlink" title="基本配置示例"></a>基本配置示例</h3><pre class=" language-markdown"><code class="language-markdown">title: 使用Hexo发布一篇文章
-date: 2021-11-20 21：30：00
-author: Tulong
-img: /source/images/xxx.jpg
-summary: 记录了Hexo发布一篇文章的一般流程
-tags:
-<span class="token list punctuation">-</span> Hexo
-<span class="token list punctuation">-</span> Markdown
-categories: 博客
+</li>
+</ol>
+<h3 id="6-getters的使用"><a href="#6-getters的使用" class="headerlink" title="6.getters的使用"></a>6.getters的使用</h3><ol>
+<li><p>概念：当state中的数据需要经过加工后再使用时，可以使用getters加工。</p>
+</li>
+<li><p>在<code>store.js</code>中追加<code>getters</code>配置</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">// bigSum 可以理解为一个计算属性</span>
+    <span class="token function">bigSum</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> state<span class="token punctuation">.</span>sum <span class="token operator">*</span> <span class="token number">10</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//创建并暴露store</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span><span class="token operator">...</span>
+    getters
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h3><p>参见：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md#%E6%96%87%E7%AB%A0-front-matter-%E4%BB%8B%E7%BB%8D">Front-matter 选项详解</a></p>
+</li>
+<li><p>组件中读取getters中的数据：<code>this.$store.getters.bigSum</code></p>
+</li>
+</ol>
+<h3 id="7-四个map方法的使用"><a href="#7-四个map方法的使用" class="headerlink" title="7.四个map方法的使用"></a>7.四个map方法的使用</h3><ol start="0">
+<li><p><strong>为什么要使用 mapXXX 方法？</strong><br>当我们在组件中操作store中存储的数据时不可避免的要编写大量的computed和methods，这样的操作十分繁琐，而使用 mapXXX 方法能简化我们的操作。例如借助 <code>mapState()</code> 方法可以帮我们生成相应的computed，借助 <code>mapActions()</code> 方法可以帮我们生成相应的methods，其他的方法同理。再使用 … 扩展运算符将生成的computed或methods展开。</p>
+</li>
+<li><p><strong>首先需要在组件中导入 mapXXX 方法</strong><br><code>import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'</code>  </p>
+</li>
+<li><p><strong>mapState方法：</strong>用于帮助我们映射<code>state</code>中的数据为计算属性</p>
+<pre class=" language-js"><code class="language-js">computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//（对象写法）借助mapState生成计算属性：sum、school、subject</span>
+     <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>sum<span class="token punctuation">:</span><span class="token string">'sum'</span><span class="token punctuation">,</span>school<span class="token punctuation">:</span><span class="token string">'school'</span><span class="token punctuation">,</span>subject<span class="token punctuation">:</span><span class="token string">'subject'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+         
+    <span class="token comment" spellcheck="true">//（数组写法）借助mapState生成与state中的数据同名的计算属性：sum、school、subject</span>
+    <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span><span class="token string">'school'</span><span class="token punctuation">,</span><span class="token string">'subject'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+</li>
+<li><p><strong>mapGetters方法：</strong>用于帮助我们映射<code>getters</code>中的数据为计算属性</p>
+<pre class=" language-js"><code class="language-js">computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//（对象写法）借助mapGetters生成计算属性：bigSum</span>
+    <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">{</span>bigSum<span class="token punctuation">:</span><span class="token string">'bigSum'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">//（数组写法）借助mapGetters生成同名的计算属性：bigSum</span>
+    <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'bigSum'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+</li>
+<li><p><strong>mapActions方法：</strong>用于帮助我们生成与<code>actions</code>对话的方法，即：包含<code>$store.dispatch(xxx)</code>的函数</p>
+<pre class=" language-js"><code class="language-js">methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//（对象写法）靠mapActions生成：incrementOdd、incrementWait</span>
+    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>incrementOdd<span class="token punctuation">:</span><span class="token string">'jiaOdd'</span><span class="token punctuation">,</span>incrementWait<span class="token punctuation">:</span><span class="token string">'jiaWait'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true">//（数组写法）靠mapActions生成同名的：jiaOdd, jiaWait</span>
+    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'jiaOdd'</span><span class="token punctuation">,</span><span class="token string">'jiaWait'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li><p><strong>mapMutations方法：</strong>用于帮助我们生成与<code>mutations</code>对话的方法，即：包含<code>$store.commit(xxx)</code>的函数</p>
+<pre class=" language-js"><code class="language-js">methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//（对象写法）靠mapActions生成：increment、decrement</span>
+    <span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token punctuation">{</span>increment<span class="token punctuation">:</span><span class="token string">'JIA'</span><span class="token punctuation">,</span>decrement<span class="token punctuation">:</span><span class="token string">'JIAN'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    
+    <span class="token comment" spellcheck="true">//（数组写法）靠mapMutations生成同名的methods：JIA、JIAN</span>
+    <span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'JIA'</span><span class="token punctuation">,</span><span class="token string">'JIAN'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>注意：借助mapActions与mapMutations生成的methods需要向actions和mutations传递参数时，必须要在调用该method的时候传递参数。</p>
+</blockquote>
+<h3 id="8-模块化-命名空间"><a href="#8-模块化-命名空间" class="headerlink" title="8.模块化+命名空间"></a>8.模块化+命名空间</h3><ol>
+<li><p>目的：让代码更好维护，让多种数据分类更加明确。</p>
+</li>
+<li><p>修改<code>store.js</code></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> countAbout <span class="token operator">=</span> <span class="token punctuation">{</span>
+  namespaced<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//开启命名空间</span>
+  state<span class="token punctuation">:</span><span class="token punctuation">{</span>x<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">bigSum</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">return</span> state<span class="token punctuation">.</span>sum <span class="token operator">*</span> <span class="token number">10</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> personAbout <span class="token operator">=</span> <span class="token punctuation">{</span>
+  namespaced<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//开启命名空间</span>
+  state<span class="token punctuation">:</span><span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    countAbout<span class="token punctuation">:</span> countAbout<span class="token punctuation">,</span>
+    personAbout<span class="token punctuation">:</span> personAbout
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li><p>开启命名空间后，组件中读取state数据：</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接读取</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>countAbout<span class="token punctuation">.</span>sum
+<span class="token comment" spellcheck="true">//方式二：借助mapState生成后再读取：</span>
+<span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span><span class="token string">'school'</span><span class="token punctuation">,</span><span class="token string">'subject'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li><p>开启命名空间后，组件中读取getters数据：</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接读取</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>getters<span class="token punctuation">[</span><span class="token string">'countAbout/bigSum'</span><span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true">//方式二：借助mapGetters生成后再读取：</span>
+<span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'bigSum'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li><p>开启命名空间后，组件中调用dispatch</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接dispatch</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'personAbout/addPersonWang'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//方式二：借助mapActions生成后再读取：</span>
+<span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'personAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'addPersonWang'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li><p>开启命名空间后，组件中调用commit</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接commit</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'personAbout/ADD_PERSON'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//方式二：借助mapMutations生成后再读取：</span>
+<span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token string">'personAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'ADD_PERSON'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ol>
 <hr>
-<h2 id="用-Markdown-语法编写正文部分"><a href="#用-Markdown-语法编写正文部分" class="headerlink" title="用 Markdown 语法编写正文部分"></a>用 Markdown 语法编写正文部分</h2><p>像这样：<br><img src="0.png" alt="示例"></p>
-<h3 id="在文章中插入图片的方法"><a href="#在文章中插入图片的方法" class="headerlink" title="在文章中插入图片的方法"></a>在文章中插入图片的方法</h3><p><em><strong>1. 在本地引用</strong></em></p>
-<p>绝对路径：当Hexo项目中只用到少量图片时，可以将图片统一放在 source/images 文件夹中，通过markdown语法访问它们。这种方式引入的图片既可以在首页内容中访问到，也可以在文章正文中访问到。像下面这样引用：</p>
-<p><code>![图片alt](/images/image.jpg "图片title")</code></p>
-<p>相对路径：图片还可以放在文章自己的文件夹中。将 _config.yml 文件中的配置项 post_asset_folder 设为 true 后，执行命令<code>$ hexo new post_name</code>，在 source/_posts 中会生成文章 post_name.md 和同名文件夹 post_name 。将图片资源放在 post_name 中，文章就可以使用相对路径引用图片资源了。像下面这样引入：</p>
-<p><code>![图片alt](image.jpg)</code></p>
-<p>这样引入的图片只能在文章中显示，但无法在首页中正常显示。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。像这样：</p>
-<p><code>{% asset_img image.jpg This is an image %}</code></p>
-<p><em><strong>2. CDN 引用</strong></em></p>
-<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。比如 Cloudinary 提供的图片 CDN 服务，在 Cloudinary 中上传图片后，会生成对应的 url 地址，将地址直接拿来引用即可。</p>
-<hr>
-<h2 id="启动服务器，本地测试"><a href="#启动服务器，本地测试" class="headerlink" title="启动服务器，本地测试"></a>启动服务器，本地测试</h2><p><code>$ hexo server</code></p>
-<hr>
-<h2 id="生成静态文件并部署到-GitHub-上"><a href="#生成静态文件并部署到-GitHub-上" class="headerlink" title="生成静态文件并部署到 GitHub 上"></a>生成静态文件并部署到 GitHub 上</h2><p>想要发布的文章在本地预览无误后，在 Git Bash 命令窗口依次执行如下命令：</p>
-<p><code>$ hexo clean</code></p>
-<p><code>$ hexo generate</code></p>
-<p><code>$ hexo deploy</code></p>
-<p>执行完毕后在浏览器访问自己的博客域名，即可看到刚才发布的文章。</p>
+<p><em><strong>本文章根据尚硅谷笔记整理而成</strong></em></p>
 
                 
             </div>
@@ -514,7 +686,7 @@ categories: 博客
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jacob-tu.github.io/2021/blogwriting/">https://jacob-tu.github.io/2021/blogwriting/</a>
+                    <a href="https://jacob-tu.github.io/2021/vuexnote/">https://jacob-tu.github.io/2021/vuexnote/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -552,12 +724,8 @@ categories: 博客
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
-                                </a>
-                            
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
+                                <a href="/tags/Vuex/">
+                                    <span class="chip bg-color">Vuex</span>
                                 </a>
                             
                         </div>
@@ -729,9 +897,10 @@ categories: 博客
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/vuexnote/">
                     <div class="card-image">
@@ -749,9 +918,9 @@ categories: 博客
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -764,6 +933,7 @@ categories: 博客
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -782,31 +952,31 @@ categories: 博客
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/myfirstblog/">
+                <a href="/2021/blogwriting/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="我的第一篇博客文章">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="使用Hexo发布一篇文章">
                         
-                        <span class="card-title">我的第一篇博客文章</span>
+                        <span class="card-title">使用Hexo发布一篇文章</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一篇博客
+                            记录了Hexo发布一篇文章的一般流程
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/web%E5%89%8D%E7%AB%AF/" class="post-category">
-                                    web前端
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    博客
                                 </a>
                             
                             
@@ -820,8 +990,8 @@ categories: 博客
                         <span class="chip bg-color">Hexo</span>
                     </a>
                     
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">博客</span>
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
                     </a>
                     
                 </div>

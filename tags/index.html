@@ -218,7 +218,7 @@
     }
 
     .github-corner svg {
-        color: #F59DC0;
+        color: #654ea3;
         fill: #fff;
         height: 64px;
         width: 64px;
@@ -302,9 +302,7 @@
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
 </script>
 
 
@@ -350,6 +348,15 @@
                     </span>
                 </a>
                 
+                
+                <a href="/tags/Vuex/" title="Vuex: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Vuex" style="background-color: #E8F8F5;">Vuex
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -374,7 +381,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"Hexo","weight":3,"link":"/tags/Hexo/"},{"text":"Markdown","weight":2,"link":"/tags/Markdown/"},{"text":"博客","weight":1,"link":"/tags/博客/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"Hexo","weight":3,"link":"/tags/Hexo/"},{"text":"Markdown","weight":2,"link":"/tags/Markdown/"},{"text":"博客","weight":1,"link":"/tags/博客/"},{"text":"Vuex","weight":1,"link":"/tags/Vuex/"}], {
         autoResize: true
     });
 </script>
@@ -454,7 +461,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">901</span>
+                        class="white-color">2.1k</span>
             
             
             

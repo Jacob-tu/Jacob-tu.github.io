@@ -242,7 +242,10 @@ mark {
 
 .bg-color {
     /* #BC65C9 */
-    background-image: linear-gradient(to right, #B700FF 0%, #F59DC0 100%);
+    /* background-image: linear-gradient(to right, #B700FF 0%, #F59DC0 100%); */
+    /* background-image: linear-gradient(to right, #ee9ca7 0%, #ffdde1 100%); */
+    /* background-image: linear-gradient(to right, #654ea3 0%, #eaafc8 100%); */
+    background-image: linear-gradient(to right, #eaafc8 0%, #654ea3 100%);
 }
 
 .text-color {
