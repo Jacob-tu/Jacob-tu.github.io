@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vuex Note, 梦开始的地方">
-    <meta name="description" content="Vuex 的原理和使用">
+    <meta name="keywords" content="虚拟 DOM 和 diff 算法（上）【转】尚硅谷, 梦开始的地方">
+    <meta name="description" content="分析虚拟DOM和diff算法相关函数的实现">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Vuex Note | 梦开始的地方</title>
+    <title>虚拟 DOM 和 diff 算法（上）【转】尚硅谷 | 梦开始的地方</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/pinkheart.ico">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -267,12 +267,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vuex Note</h1>
+                    <h1 class="description center-align post-title">虚拟 DOM 和 diff 算法（上）【转】尚硅谷</h1>
                 </div>
             </div>
         </div>
@@ -388,12 +388,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JavaScript/">
-                                <span class="chip bg-color">JavaScript</span>
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
                             </a>
                         
-                            <a href="/tags/Vuex/">
-                                <span class="chip bg-color">Vuex</span>
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
                             </a>
                         
                     </div>
@@ -417,7 +417,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-22
+                    2021-12-04
                 </div>
                 
 
@@ -448,222 +448,137 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>​ 在 Vue 中实现集中式状态（数据）管理的一个 Vue 插件，对 vue 应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
-<h3 id="2-何时使用？"><a href="#2-何时使用？" class="headerlink" title="2.何时使用？"></a>2.何时使用？</h3><p>​ 多个组件需要共享数据时</p>
-<h3 id="3-工作原理图"><a href="#3-工作原理图" class="headerlink" title="3.工作原理图"></a>3.工作原理图</h3><p><img src="vuex.png" alt="Vuex 原理图（来源于官网）"></p>
-<h3 id="4-搭建-vuex-环境"><a href="#4-搭建-vuex-环境" class="headerlink" title="4.搭建 vuex 环境"></a>4.搭建 vuex 环境</h3><ol>
-<li><p>创建文件：<code>src/store/index.js</code></p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入Vue核心库</span>
-<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//引入Vuex</span>
-<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">"vuex"</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//应用Vuex插件</span>
-Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//准备actions对象——响应组件中用户的动作</span>
-<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//准备mutations对象——修改state中的数据</span>
-<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//准备state对象——保存具体的数据</span>
-<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//创建并暴露store</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  actions<span class="token punctuation">,</span>
-  mutations<span class="token punctuation">,</span>
-  state<span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h3 id="1-真实-DOM-和虚拟-DOM"><a href="#1-真实-DOM-和虚拟-DOM" class="headerlink" title="1.真实 DOM 和虚拟 DOM"></a>1.真实 DOM 和虚拟 DOM</h3><p>真实 DOM 是 html 页面中的 DOM 元素。虚拟 DOM 是用 JavaScript 对象描述 DOM 的层次结构。DOM 中的一切属性都在虚拟 DOM 中有对应的属性。<br>一个虚拟 DOM 的属性如下：<br><img src="0.png" alt="VirtualNode"></p>
+<h3 id="2-h-函数"><a href="#2-h-函数" class="headerlink" title="2.h 函数"></a>2.h 函数</h3><p>snabbdom 是著名的虚拟 DOM 库，是 diff 算法的鼻祖，Vue 源码借鉴了 snabbdom；</p>
+<p>官方 git：<a target="_blank" rel="noopener" href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a></p>
+<p>h 函数用来产生虚拟节点（vnode），比如像这样调用 h 函数，</p>
+<p><code>h('a', { props: { href: 'http://www.baidu.com' }}, '百度一下')</code></p>
+<p>得到的 virtual Node 如下：</p>
+<p><img src="1.png" alt="vnode"></p>
+<p>当然 h 函数也可以嵌套使用，比如这样嵌套使用 h 函数：</p>
+<pre class=" language-JS"><code class="language-JS">h('ul', {}, [ h('li', {}, '牛奶'),
+h('li', {}, '咖啡'),
+h('li', {}, '可乐')
+]);
 </code></pre>
-</li>
-<li><p>在<code>main.js</code>中创建 vm 时传入<code>store</code>配置项</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入store</span>
-<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">"./store"</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//创建vm</span>
-<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  el<span class="token punctuation">:</span> <span class="token string">"#app"</span><span class="token punctuation">,</span>
-  render<span class="token punctuation">:</span> <span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
-  store<span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>将得到这样的虚拟 DOM 树：</p>
+<pre class=" language-JS"><code class="language-JS">{
+"sel": "ul",
+"data": {},
+"children": [ { "sel": "li", "text": "牛奶" },
+{ "sel": "li", "text": "咖啡" },
+{ "sel": "li", "text": "可乐" } ] }
 </code></pre>
-</li>
-</ol>
-<h3 id="5-基本使用"><a href="#5-基本使用" class="headerlink" title="5.基本使用"></a>5.基本使用</h3><ol>
-<li><p>初始化数据、配置<code>actions</code>、配置<code>mutations</code>，操作文件<code>store.js</code></p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//引入Vue核心库</span>
-<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//引入Vuex</span>
-<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">"vuex"</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//引用Vuex</span>
-Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">//响应组件中的dispatch，传入的第一个参数context有commit,state,dispatch等属性</span>
-  <span class="token function">jia</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"JIA"</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">//执行mutate，改变state中的状态</span>
-  <span class="token function">JIA</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    state<span class="token punctuation">.</span>sum <span class="token operator">+</span><span class="token operator">=</span> value<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//初始化数据</span>
-<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
-  sum<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//创建并暴露store</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  actions<span class="token punctuation">,</span>
-  mutations<span class="token punctuation">,</span>
-  state<span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>模仿源码简单实现一个 h 函数，</p>
+<p><code>vnode.js</code></p>
+<pre class=" language-JS"><code class="language-JS">// 该函数的作用就是把传入的5个参数组合成对象返回
+export default function(sel, data, children, text, elm) {
+    const key = data.key;
+    return {
+        sel, data, children, text, elm, key
+    };
+}
 </code></pre>
-</li>
-<li><p>组件中读取 vuex 中的数据：<code>this.$store.state.sum</code></p>
-</li>
-<li><p>组件中修改 vuex 中的数据：<code>this.$store.dispatch('action中的方法名',数据)</code> 或 <code>this.$store.commit('mutations中的方法名',数据)</code></p>
-<blockquote>
-<p>备注：若没有网络请求或其他业务逻辑，组件中也可以直接 commit，即不写<code>dispatch</code>，直接写<code>commit</code></p>
-</blockquote>
-</li>
-</ol>
-<h3 id="6-getters-的使用"><a href="#6-getters-的使用" class="headerlink" title="6.getters 的使用"></a>6.getters 的使用</h3><ol>
-<li><p>概念：当 state 中的数据需要经过加工后再使用时，可以使用 getters 加工。</p>
-</li>
-<li><p>在<code>store.js</code>中追加<code>getters</code>配置</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">{</span>
- <span class="token comment" spellcheck="true">// bigSum 可以理解为一个计算属性</span>
-    <span class="token function">bigSum</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> state<span class="token punctuation">.</span>sum <span class="token operator">*</span> <span class="token number">10</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<p><code>h.js</code></p>
+<pre class=" language-JS"><code class="language-JS">import vnode from './vnode.js';
 
-<span class="token comment" spellcheck="true">//创建并暴露store</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    <span class="token operator">...</span><span class="token operator">...</span>
-    getters
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+// 编写一个低配版本的h函数，这个函数必须接受3个参数，缺一不可
+// 相当于它的重载功能较弱。
+// 也就是说，调用的时候形态必须是下面的三种之一：
+// 形态① h('div', {}, '文字')
+// 形态② h('div', {}, [])
+// 形态③ h('div', {}, h())
+export default function h(sel, data, c) {
+    // 检查参数的个数
+    if (arguments.length != 3)
+        throw new Error('h函数必须传入3个参数，我们是低配版h函数');
+    // 检查参数c的类型
+    if (typeof c == 'string' || typeof c == 'number') {
+        // 说明现在调用h函数是形态①
+        return vnode(sel, data, undefined, c, undefined);
+    } else if (Array.isArray(c)) {
+        // 说明现在调用h函数是形态②
+        let children = [];
+        // 遍历c，收集children，遍历的时候数组中各项已经由h函数生成了vnode
+        for (let i = 0; i < c.length; i++) {
+            // 检查c[i]必须是一个由h函数生成的vnode
+            if (!(typeof c[i] == 'object' && c[i].hasOwnProperty('sel')))
+                throw new Error('传入的数组参数中有项不是h函数');
+            children.push(c[i]);
+        }
+        // 循环结束了，就说明children收集完毕了，此时可以返回虚拟节点了，它有children属性的
+        return vnode(sel, data, children, undefined, undefined);
+    } else if (typeof c == 'object' && c.hasOwnProperty('sel')) {
+        // 说明现在调用h函数是形态③
+        // 即，传入的c是唯一的children。
+        let children = [c];
+        return vnode(sel, data, children, undefined, undefined);
+    } else {
+        throw new Error('传入的第三个参数类型不对');
+    }
+};
 </code></pre>
-</li>
-<li><p>组件中读取 getters 中的数据：<code>this.$store.getters.bigSum</code></p>
-</li>
-</ol>
-<h3 id="7-四个-map-方法的使用"><a href="#7-四个-map-方法的使用" class="headerlink" title="7.四个 map 方法的使用"></a>7.四个 map 方法的使用</h3><ol start="0">
-<li><p><strong>为什么要使用 mapXXX 方法？</strong><br>当我们在组件中操作 store 中存储的数据时不可避免的要编写大量的 computed 和 methods，这样的操作十分繁琐，而使用 mapXXX 方法能简化我们的操作。例如借助 <code>mapState()</code> 方法可以帮我们生成相应的 computed，借助 <code>mapActions()</code> 方法可以帮我们生成相应的 methods，其他的方法同理。再使用 … 扩展运算符将生成的 computed 或 methods 展开。</p>
-</li>
-<li><p><strong>首先需要在组件中导入 mapXXX 方法</strong><br><code>import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'</code></p>
-</li>
-<li><p><strong>mapState 方法：</strong>用于帮助我们映射<code>state</code>中的数据为计算属性</p>
-<pre class=" language-js"><code class="language-js">computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//（对象写法）借助mapState生成计算属性：sum、school、subject</span>
-     <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>sum<span class="token punctuation">:</span><span class="token string">'sum'</span><span class="token punctuation">,</span>school<span class="token punctuation">:</span><span class="token string">'school'</span><span class="token punctuation">,</span>subject<span class="token punctuation">:</span><span class="token string">'subject'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<h3 id="3-patch-函数"><a href="#3-patch-函数" class="headerlink" title="3.patch 函数"></a>3.patch 函数</h3><p><code>patch</code>函数用来更新真实 DOM 节点，该函数传入两个参数，一个是旧的 vnode，一个是新的 vnode。</p>
+<p><img src="2.png" alt="patch 函数"></p>
+<p>diff 处理新旧节点不是同一个节点时会直接删除旧的 dom，并插入新的 dom。如何定义“同一个节点”？旧节点的 sel 属性要和新节点的 sel 属性相同且旧节点的 key 要和新节点的 key 相同。key 属性是节点的唯一标识。</p>
+<p><code>patch.js</code></p>
+<pre class=" language-JS"><code class="language-JS">import vnode from './vnode.js';
+import createElement from './createElement.js';
+import patchVnode from './patchVnode.js'
 
-    <span class="token comment" spellcheck="true">//（数组写法）借助mapState生成与state中的数据同名的计算属性：sum、school、subject</span>
-    <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span><span class="token string">'school'</span><span class="token punctuation">,</span><span class="token string">'subject'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
-</code></pre>
-</li>
-<li><p><strong>mapGetters 方法：</strong>用于帮助我们映射<code>getters</code>中的数据为计算属性</p>
-<pre class=" language-js"><code class="language-js">computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//（对象写法）借助mapGetters生成计算属性：bigSum</span>
-    <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">{</span>bigSum<span class="token punctuation">:</span><span class="token string">'bigSum'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+export default function patch(oldVnode, newVnode) {
+    // 判断传入的第一个参数，是DOM节点还是虚拟节点？
+    if (oldVnode.sel == '' || oldVnode.sel == undefined) {
+        // 传入的第一个参数是DOM节点，此时要包装为虚拟节点
+        oldVnode = vnode(oldVnode.tagName.toLowerCase(), {}, [], undefined, oldVnode);
+    }
 
-    <span class="token comment" spellcheck="true">//（数组写法）借助mapGetters生成同名的计算属性：bigSum</span>
-    <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'bigSum'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
-</code></pre>
-</li>
-<li><p><strong>mapActions 方法：</strong>用于帮助我们生成与<code>actions</code>对话的方法，即：包含<code>$store.dispatch(xxx)</code>的函数</p>
-<pre class=" language-js"><code class="language-js">methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//（对象写法）靠mapActions生成：incrementOdd、incrementWait</span>
-    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>incrementOdd<span class="token punctuation">:</span><span class="token string">'jiaOdd'</span><span class="token punctuation">,</span>incrementWait<span class="token punctuation">:</span><span class="token string">'jiaWait'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    // 判断oldVnode和newVnode是不是同一个节点
+    if (oldVnode.key == newVnode.key && oldVnode.sel == newVnode.sel) {
+        console.log('是同一个节点');
+        // 调用patchVnode函数进行diff
+        patchVnode(oldVnode, newVnode);
+    } else {
+        console.log('不是同一个节点，暴力插入新的，删除旧的');
+        // 调用createElement函数，该函数将传入的虚拟dom转为真实dom返回
+        let newVnodeElm = createElement(newVnode);
 
-    <span class="token comment" spellcheck="true">//（数组写法）靠mapActions生成同名的：jiaOdd, jiaWait</span>
-    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'jiaOdd'</span><span class="token punctuation">,</span><span class="token string">'jiaWait'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+        // 插入到旧节点之前
+        oldVnode.elm.parentNode.insertBefore(newVnodeElm, oldVnode.elm);
+        // 删除旧节点
+        oldVnode.elm.parentNode.removeChild(oldVnode.elm);
+    }
+};
 </code></pre>
-</li>
-<li><p><strong>mapMutations 方法：</strong>用于帮助我们生成与<code>mutations</code>对话的方法，即：包含<code>$store.commit(xxx)</code>的函数</p>
-<pre class=" language-js"><code class="language-js">methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//（对象写法）靠mapActions生成：increment、decrement</span>
-    <span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token punctuation">{</span>increment<span class="token punctuation">:</span><span class="token string">'JIA'</span><span class="token punctuation">,</span>decrement<span class="token punctuation">:</span><span class="token string">'JIAN'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<h3 id="4-createElement-函数"><a href="#4-createElement-函数" class="headerlink" title="4.createElement 函数"></a>4.createElement 函数</h3><p>createElement 函数用于将虚拟 dom 转为真实 dom。</p>
+<p><code>createElement.js</code></p>
+<pre class=" language-JS"><code class="language-JS">// 该函数的作用就是将传入的虚拟dom转为真实dom返回
+export default function createElement(vnode) {
+    // 创建一个真实DOM节点，这个节点现在还是孤儿节点
+    let domNode = document.createElement(vnode.sel);
+    // 判断该节点是否有children
+    if (vnode.text != '' && (vnode.children == undefined || vnode.children.length == 0)) {
+        // 文本节点
+        domNode.innerText = vnode.text;
+    } else if (Array.isArray(vnode.children) && vnode.children.length > 0) {
+        // 它内部有子节点，就要递归创建子节点
+        for (let i = 0; i < vnode.children.length; i++) {
+            // 得到当前这个children
+            let ch = vnode.children[i];
+            // 创建出它的DOM，一旦调用createElement意味着：创建出DOM了，并且它的elm属性指向了创建出的DOM，但是还没有上树，是一个孤儿节点。
+            let chDOM = createElement(ch);
+            // 将子节点添加到父节点上，操作的是真实dom
+            domNode.appendChild(chDOM);
+        }
+    }
+    // 添加elm属性，elm属性是一个真实DOM对象
+    vnode.elm = domNode;
 
-    <span class="token comment" spellcheck="true">//（数组写法）靠mapMutations生成同名的methods：JIA、JIAN</span>
-    <span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'JIA'</span><span class="token punctuation">,</span><span class="token string">'JIAN'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
+    return vnode.elm;
+};
 </code></pre>
-</li>
-</ol>
-<blockquote>
-<p>注意：借助 mapActions 与 mapMutations 生成的 methods 需要向 actions 和 mutations 传递参数时，必须要在调用该 method 的时候传递参数。</p>
-</blockquote>
-<h3 id="8-模块化-命名空间"><a href="#8-模块化-命名空间" class="headerlink" title="8.模块化+命名空间"></a>8.模块化+命名空间</h3><ol>
-<li><p>目的：让代码更好维护，让多种数据分类更加明确。</p>
-</li>
-<li><p>修改<code>store.js</code></p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> countAbout <span class="token operator">=</span> <span class="token punctuation">{</span>
-  namespaced<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//开启命名空间</span>
-  state<span class="token punctuation">:</span><span class="token punctuation">{</span>x<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token function">bigSum</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
-       <span class="token keyword">return</span> state<span class="token punctuation">.</span>sum <span class="token operator">*</span> <span class="token number">10</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> personAbout <span class="token operator">=</span> <span class="token punctuation">{</span>
-  namespaced<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//开启命名空间</span>
-  state<span class="token punctuation">:</span><span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    countAbout<span class="token punctuation">:</span> countAbout<span class="token punctuation">,</span>
-    personAbout<span class="token punctuation">:</span> personAbout
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-<li><p>开启命名空间后，组件中读取 state 数据：</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接读取</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>countAbout<span class="token punctuation">.</span>sum
-<span class="token comment" spellcheck="true">//方式二：借助mapState生成后再读取：</span>
-<span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span><span class="token string">'school'</span><span class="token punctuation">,</span><span class="token string">'subject'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-<li><p>开启命名空间后，组件中读取 getters 数据：</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接读取</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>getters<span class="token punctuation">[</span><span class="token string">'countAbout/bigSum'</span><span class="token punctuation">]</span>
-<span class="token comment" spellcheck="true">//方式二：借助mapGetters生成后再读取：</span>
-<span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'bigSum'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-<li><p>开启命名空间后，组件中调用 dispatch</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接dispatch</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'personAbout/addPersonWang'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//方式二：借助mapActions生成后再读取：</span>
-<span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'personAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'addPersonWang'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-<li><p>开启命名空间后，组件中调用 commit</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">//方式一：自己直接commit</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'personAbout/ADD_PERSON'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//方式二：借助mapMutations生成后再读取：</span>
-<span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token string">'personAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'ADD_PERSON'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-</li>
-</ol>
-<hr>
-<p><strong><em>本文章根据尚硅谷笔记整理而成</em></strong></p>
+<p>本文主要介绍了虚拟 dom 和 diff 算法相关的 h 函数、patch 函数、createElement 函数并进行了简单实现，处理的是新旧节点不是同一个节点的情况。</p>
+<p><strong><em>转载自尚硅谷笔记</em></strong></p>
 
                 
             </div>
@@ -690,7 +605,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jacob-tu.github.io/2021/vuexnote/">https://jacob-tu.github.io/2021/vuexnote/</a>
+                    <a href="https://jacob-tu.github.io/2021/vnode-diff/">https://jacob-tu.github.io/2021/vnode-diff/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -728,12 +643,12 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JavaScript/">
-                                    <span class="chip bg-color">JavaScript</span>
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
                                 </a>
                             
-                                <a href="/tags/Vuex/">
-                                    <span class="chip bg-color">Vuex</span>
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
                                 </a>
                             
                         </div>
@@ -905,29 +820,30 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/datareactive/">
+                <a href="/2021/vnode-diff/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Vue 2数据响应式原理">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="虚拟 DOM 和 diff 算法（上）【转】尚硅谷">
                         
-                        <span class="card-title">Vue 2数据响应式原理</span>
+                        <span class="card-title">虚拟 DOM 和 diff 算法（上）【转】尚硅谷</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            分析并手写Vue 2的数据响应式底层代码
+                            分析虚拟DOM和diff算法相关函数的实现
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -940,6 +856,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -962,31 +879,31 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/blogwriting/">
+                <a href="/2021/datareactive/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="使用Hexo发布一篇文章">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Vue 2数据响应式原理">
                         
-                        <span class="card-title">使用Hexo发布一篇文章</span>
+                        <span class="card-title">Vue 2数据响应式原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            用Hexo发布一篇文章的一般流程
+                            分析并手写Vue 2的数据响应式底层代码
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-28
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
                                 </a>
                             
                             
@@ -996,12 +913,12 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
                     </a>
                     
-                    <a href="/tags/Markdown/">
-                        <span class="chip bg-color">Markdown</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
