@@ -388,10 +388,6 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Vue/">
-                                <span class="chip bg-color">Vue</span>
-                            </a>
-                        
                             <a href="/tags/JavaScript/">
                                 <span class="chip bg-color">JavaScript</span>
                             </a>
@@ -404,8 +400,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                笔记
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                Web前端
                             </a>
                         
                     </div>
@@ -426,7 +422,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
@@ -521,6 +517,15 @@ export default function h(sel, data, c) {
 <h3 id="3-patch-函数"><a href="#3-patch-函数" class="headerlink" title="3.patch 函数"></a>3.patch 函数</h3><p><code>patch</code>函数用来更新真实 DOM 节点，该函数传入两个参数，一个是旧的 vnode，一个是新的 vnode。</p>
 <p><img src="2.png" alt="patch 函数"></p>
 <p>diff 处理新旧节点不是同一个节点时会直接删除旧的 dom，并插入新的 dom。如何定义“同一个节点”？旧节点的 sel 属性要和新节点的 sel 属性相同且旧节点的 key 要和新节点的 key 相同。key 属性是节点的唯一标识。</p>
+<p>来看一下源码中对同一节点的定义</p>
+<pre class=" language-JS"><code class="language-JS">function sameVnode(vnode1, vnode2) {
+    var _a, _b;
+    const isSameKey = vnode1.key === vnode2.key;
+    const isSameIs = ((_a = vnode1.data) === null || _a === void 0 ? void 0 : _a.is) === ((_b = vnode2.data) === null || _b === void 0 ? void 0 : _b.is);
+    const isSameSel = vnode1.sel === vnode2.sel;
+    return isSameSel && isSameKey && isSameIs;
+}
+</code></pre>
 <p><code>patch.js</code></p>
 <pre class=" language-JS"><code class="language-JS">import vnode from './vnode.js';
 import createElement from './createElement.js';
@@ -577,8 +582,7 @@ export default function createElement(vnode) {
     return vnode.elm;
 };
 </code></pre>
-<p>本文主要介绍了虚拟 dom 和 diff 算法相关的 h 函数、patch 函数、createElement 函数并进行了简单实现，处理的是新旧节点不是同一个节点的情况。</p>
-<p><strong><em>转载自尚硅谷笔记</em></strong></p>
+<p><strong>本文主要介绍了虚拟 dom 和 diff 算法相关的 h 函数、patch 函数、createElement 函数并进行了简单实现，处理的是新旧节点不是同一个节点的情况。函数的实现并非官方源码，只对大体的逻辑流程进行了代码实现，而忽略了很多细节问题，仅可作学习使用。</strong></p>
 
                 
             </div>
@@ -642,10 +646,6 @@ export default function createElement(vnode) {
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Vue/">
-                                    <span class="chip bg-color">Vue</span>
-                                </a>
                             
                                 <a href="/tags/JavaScript/">
                                     <span class="chip bg-color">JavaScript</span>
@@ -820,18 +820,17 @@ export default function createElement(vnode) {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/vnode-diff/">
+                <a href="/2021/vnode-diff2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="虚拟 DOM 和 diff 算法（上）【转】尚硅谷">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="虚拟 DOM 和 diff 算法（下）【转】尚硅谷">
                         
-                        <span class="card-title">虚拟 DOM 和 diff 算法（上）【转】尚硅谷</span>
+                        <span class="card-title">虚拟 DOM 和 diff 算法（下）【转】尚硅谷</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -841,28 +840,23 @@ export default function createElement(vnode) {
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-06
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    Web前端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
-                    </a>
                     
                     <a href="/tags/JavaScript/">
                         <span class="chip bg-color">JavaScript</span>
@@ -902,8 +896,8 @@ export default function createElement(vnode) {
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    Web前端
                                 </a>
                             
                             
@@ -1122,7 +1116,7 @@ export default function createElement(vnode) {
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">6.2k</span>
+                        class="white-color">7.4k</span>
             
             
             
