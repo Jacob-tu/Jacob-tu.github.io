@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>动态规划</title>
+      <link href="/2021/dplan/"/>
+      <url>/2021/dplan/</url>
+      
+        <content type="html"><![CDATA[<h3 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h3><p>一般来说，利用动态规划求解问题可以分为以下几个基本步骤：</p><ol><li>定义子问题；</li><li>建立各个子问题之间的递归关系；</li><li>自底向上求解递归式；</li><li>组合所有子问题的解从而获得原问题的解；</li></ol><h3 id="一维动态规划问题"><a href="#一维动态规划问题" class="headerlink" title="一维动态规划问题"></a>一维动态规划问题</h3><p><strong>打家劫舍</strong></p><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</strong></p><p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>不触动警报装置的情况下</strong> ，一夜之内能够偷窃到的最高金额。</p><p><strong>输入：</strong>[2, 7, 9, 3, 1]<br><strong>输出：</strong>12<br><strong>解释：</strong>偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。<br>&nbsp; 偷窃到的最高金额 = 2 + 9 + 1 = 12 。</p><p>来源：力扣（LeetCode）</p><p>求解问题的步骤：</p><ol><li><p><strong>定义子问题</strong><br>子问题就是把原问题的规模缩小，例如此题的子问题就是“从前 k 个房子中能偷到的最大金额”，用 f(k) 表示。</p></li><li><p><strong>建立各个子问题之间的递归关系</strong><br>我们从第 k 间房子开始分析，如果不偷这个房子，那么问题就变成在前 k−1 个房子中偷到最大的金额，也就是子问题 f(k−1)。如果偷这个房子，那么前一个房子不能偷，那么问题就变成在前 k−2 个房子中偷到的最大的金额。两种情况中，选择金额较大的一种结果。<br>通过分析得到子问题之间的递归关系：<br><code>f(k) = max{ f(k-1), H(k) + f(k-2) }</code>，H(k)为第 k 间房的金额</p></li><li><p><strong>自底向上求解递归式</strong><br>自底向上构造一维动态规划表，初始化表为<code>f(0) = 0, f(1) = H(1)</code>，其他的项根据递归关系得出。</p></li><li><p><strong>组合所有子问题的解从而获得原问题的解</strong><br>此题原问题的解就是动态规划表的最后一项的值。</p></li></ol><p>代码实现：</p><pre class=" language-TypeScript"><code class="language-TypeScript">// 自底向上实现递归策略function rob(nums: number[]): number[] {  const len: number = nums.length;  if (len === 0) {    return [0];  }  // 子问题：  // f(k) = 偷 [0..k) 房间中的最大金额  // f(0) = 0  // f(1) = nums[0]  // f(k) = max{ rob(k-1), nums[k-1] + rob(k-2) }  const dp: Array<number> = new Array(len + 1).fill(0);  // 表格初始化  dp[0] = 0;  dp[1] = nums[0];  for (let k: number = 2; k <= len; k++) {    // 填表    dp[k] = Math.max(dp[k - 1], dp[k - 2] + nums[k - 1]);  }  return dp;}</code></pre><p><strong>复杂度分析</strong></p><p>时间复杂度：O(n)<br>空间复杂度：O(n)</p><p>此外如果需要返回到底偷窃了那几家房子，可以根据表的值得到解。</p><pre class=" language-TypeScript"><code class="language-TypeScript">// 回溯得到偷窃的最优解function trace_back(dp: number[]): number[] {  const res: number[] = new Array();  var i = dp.length - 1;  // 从dp表最后一项开始求解  while (i >= 1) {    // 如果该项大于前一项说明该房间被偷窃    if (dp[i] > dp[i - 1]) {      res.push(i);      i -= 2;    } else {      i -= 1;    }  }  return res.sort((a, b) => a - b);}var coins: number[] = [2, 7, 9, 3, 1];var dp: number[] = rob(coins);var res: number[] = trace_back(dp);console.log("动态规划表：", dp);console.log("偷窃的房间：", res);</code></pre><p><strong>测试用例：</strong>[2, 7, 9, 3, 1]</p><p><strong>输出结果：</strong><br><img src="0.png" alt="终端输出"></p><h3 id="二维动态规划问题"><a href="#二维动态规划问题" class="headerlink" title="二维动态规划问题"></a>二维动态规划问题</h3><p><strong>最长回文子串</strong></p><p>给你一个字符串 s ，找到 s 中最长的回文子串。</p><p><strong>输入：</strong>s = “babad”<br><strong>输出：</strong>“bab”<br><strong>解释：</strong>“aba” 同样是符合题意的答案。</p><p>来源：力扣（LeetCode）</p><p><strong>思路</strong></p><p>对于一个子串而言，如果它是回文串，并且长度大于 2，那么将它首尾的两个字母去除之后，它仍然是个回文串。例如对于字符串 <code>"abcba"</code>，如果我们已经知道 <code>"bcb"</code> 是回文串，那么 <code>"abcba"</code> 一定是回文串，这是因为它的首尾两个字母都是 <code>"a"</code>。也就是说一个字符串是否是回文串，取决于它的首尾两个字符是否相等以及去掉首位两个字符后的子串是否是回文串。这样我们就把原问题分解成了问题规模更小的子问题。</p><p>根据这样的思路，我们就可以用动态规划的方法解决本题。</p><p>代码实现：</p><pre class=" language-TypeScript"><code class="language-TypeScript">function longestPalindrome(s: string): string {    /*        动态规划求解步骤        1.状态定义：            dp[i][j]为true/false表示s中下标i-j之间的子串是否为回文串        2.状态转移方程            dp[i][j] == (s[i]==s[j] && dp[i+1][j-1])        3.填表并记录最大回文串的长度和起始下标求得解    */    const len: number = s.length;    if (len < 2) {        return s    }    // 记录最大长度，初始值为1    var maxLen: number = 1;    // 记录最长的回文子串的起始位置    var beginIdx: number = 0;    // 初始化二维数组dp    const dp: boolean[][] = new Array(len).fill(-1).map(() => []);    // for (let i: number = 0; i < len; i++) {    //     dp[i] = new Array(len);    // }    // 将对角线上的元素置为true    for (let i: number = 0; i < len; i++) {        dp[i][i] = true;    }    // 填表规则：先一列一列的填写，再一行一行的填，保证左下方的单元格先填    for (let j: number = 1; j < len; j++) {        for (let i: number = 0; i < j; i++) {            if (s[i] !== s[j]) {                dp[i][j] = false;            } else {                // 头尾指针相等时                if (j - i < 3) {                    // 如果头尾去掉以后没有字符剩余，或者剩下一个字符的时候，肯定是回文串                    dp[i][j] = true;                } else {                    // 状态转移                    dp[i][j] = dp[i + 1][j - 1];                }            }            // s[i...j]是回文串时判断是否是最长回文子串            if (dp[i][j] && maxLen < j - i + 1) {                maxLen = j - i + 1;                beginIdx = i;            }        }    }    // 根据起始位置和长度返回结果    return s.slice(beginIdx, beginIdx + maxLen);};</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TypeScript </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>虚拟 DOM 和 diff 算法（下）【转】尚硅谷</title>
       <link href="/2021/vnode-diff2/"/>
       <url>/2021/vnode-diff2/</url>
