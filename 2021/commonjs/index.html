@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 梦开始的地方">
-    <meta name="description" content="Hello World">
+    <meta name="keywords" content="Node.js模块化开发, 梦开始的地方">
+    <meta name="description" content="CommonJS规范">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 梦开始的地方</title>
+    <title>Node.js模块化开发 | 梦开始的地方</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/pinkheart.ico">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -267,12 +267,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Node.js模块化开发</h1>
                 </div>
             </div>
         </div>
@@ -388,12 +388,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
-                            </a>
-                        
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
+                            <a href="/tags/Node-js/">
+                                <span class="chip bg-color">Node.js</span>
                             </a>
                         
                     </div>
@@ -404,8 +400,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                博客
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
                             </a>
                         
                     </div>
@@ -417,7 +413,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-17
+                    2021-12-12
                 </div>
                 
 
@@ -426,14 +422,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    586
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -448,19 +444,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+                <h3 id="模块系统"><a href="#模块系统" class="headerlink" title="模块系统"></a>模块系统</h3><p>JavaScript 原生态是一个全局的世界。所有如 setTimeout、document 等这样在浏览器端使用的 API，都是全局定义的。当我们在 html 文档中使用 script 标签引入第三方模块时，会引入该模块暴露出来的全局变量，这会导致对全局命名空间的污染和命名冲突的问题。Node 采用了 CommonJS 模块化规范。该模块系统有三个核心的全局对象：require、module 和 exports。</p>
+<h4 id="绝对模块和相对模块"><a href="#绝对模块和相对模块" class="headerlink" title="绝对模块和相对模块"></a>绝对模块和相对模块</h4><p>绝对模块是指 node 通过在其内部 node_modules 查找到的模块，或者 node 内置的如 fs 这样的模块。可以直接通过名字来 require 这个模块，无需添加路径名：<code>var fs = require('fs')</code>，这里由于 fs 模块暴露了一系列操作文件系统的方法，所以在引入时用变量接收一下这个对象。有些模块没有暴露 API，则直接引入即可，无需用变量接收。</p>
+<p>相对模块将 require 指向一个相对工作目录中的 Javascript 文件。在引入时需要添加相对路径名。</p>
+<h4 id="暴露-API"><a href="#暴露-API" class="headerlink" title="暴露 API"></a>暴露 API</h4><p>要让模块暴露一个 API 成为 require 调用的返回值，就要依靠 module 和 exports 这两个全局变量。</p>
+<p>默认情况下，每个模块都会暴露出一个名为 exports 的空对象，我们可以在该对象中添加属性。例如：</p>
+<p><code>module_a.cjs</code></p>
+<pre class=" language-javascript"><code class="language-javascript">exports<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"john"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">888</span><span class="token punctuation">;</span>
+exports<span class="token punctuation">.</span>getName <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<p><code>index.cjs</code></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./module_a.cjs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// john</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 888</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+<ol>
+<li><p>当我们在 index.cjs 中 require 导入的时候，它会去自动查找特殊的全局对象 exports，并且把 require 函数的执行结果赋值给 a;</p>
+</li>
+<li><p>a 和 exports 指向同一个引用(引用地址相同);</p>
+</li>
+<li><p>由于我们在 exports 对象上添加了属性，所以在 a 对象也可以访问到这些属性；</p>
+</li>
+</ol>
+<p><strong>exports 其实是对 module.exports 的引用，实际导出的是 module.exports，</strong>其在默认情况下是一个对象。如果默认导出该对象无法满足需求，则可以重写 module.exports。</p>
+<p><code>person.cjs</code></p>
+<pre class=" language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> Person<span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+<p><code>index.cjs</code></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> Person <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./person.cjs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">"tom"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// tom</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<blockquote>
+<p>注意：如果多次使用 module.exports，则后面的会覆盖前面的导出对象。</p>
+</blockquote>
 
                 
             </div>
@@ -487,7 +512,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jacob-tu.github.io/2021/hello-world/">https://jacob-tu.github.io/2021/hello-world/</a>
+                    <a href="https://jacob-tu.github.io/2021/commonjs/">https://jacob-tu.github.io/2021/commonjs/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -525,12 +550,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
-                                </a>
-                            
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
+                                <a href="/tags/Node-js/">
+                                    <span class="chip bg-color">Node.js</span>
                                 </a>
                             
                         </div>
@@ -702,84 +723,36 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/myfirstblog/">
+                <a href="/2021/commonjs/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="我的第一篇博客文章">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Node.js模块化开发">
                         
-                        <span class="card-title">我的第一篇博客文章</span>
+                        <span class="card-title">Node.js模块化开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一篇博客
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Hello World
+                            CommonJS规范
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-12
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
                                 </a>
                             
                             
@@ -790,12 +763,61 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/Node-js/">
+                        <span class="chip bg-color">Node.js</span>
                     </a>
                     
-                    <a href="/tags/Markdown/">
-                        <span class="chip bg-color">Markdown</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/dplan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="动态规划">
+                        
+                        <span class="card-title">动态规划</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            动态规划算法求解优化问题
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TypeScript/">
+                        <span class="chip bg-color">TypeScript</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                        <span class="chip bg-color">动态规划</span>
                     </a>
                     
                 </div>
