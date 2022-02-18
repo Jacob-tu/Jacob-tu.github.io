@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="使用Hexo发布一篇文章, 梦开始的地方">
-    <meta name="description" content="用Hexo发布一篇文章的一般流程">
+    <meta name="keywords" content="尚硅谷谷粒后台管理系统, 梦开始的地方">
+    <meta name="description" content="项目总结">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>使用Hexo发布一篇文章 | 梦开始的地方</title>
+    <title>尚硅谷谷粒后台管理系统 | 梦开始的地方</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/pinkheart.ico">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -267,12 +267,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用Hexo发布一篇文章</h1>
+                    <h1 class="description center-align post-title">尚硅谷谷粒后台管理系统</h1>
                 </div>
             </div>
         </div>
@@ -388,12 +388,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
+                            <a href="/tags/React/">
+                                <span class="chip bg-color">React</span>
                             </a>
                         
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
+                            <a href="/tags/Antd/">
+                                <span class="chip bg-color">Antd</span>
+                            </a>
+                        
+                            <a href="/tags/Redux/">
+                                <span class="chip bg-color">Redux</span>
                             </a>
                         
                     </div>
@@ -404,8 +408,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                博客
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                Web前端
                             </a>
                         
                     </div>
@@ -417,7 +421,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-20
+                    2022-02-18
                 </div>
                 
 
@@ -426,14 +430,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    673
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    9 分
                 </div>
                 
 
@@ -448,47 +452,126 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="新建一篇文章"><a href="#新建一篇文章" class="headerlink" title="新建一篇文章"></a>新建一篇文章</h2><p>1、在 hexo 博客目录下，进入 Git Bash 命令窗口中，输入以下命令：</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"我的第一篇博客文章"</span>
-</code></pre>
-<p>2、在博客目录下的/source/_posts/ 文件夹下，就可以看到已经生成了标题为(我的第一篇博客文章.md)的博客文件，在该文件中编辑自己的博客文章即可。</p>
+                <h2 id="1-项目介绍"><a href="#1-项目介绍" class="headerlink" title="1. 项目介绍"></a>1. 项目介绍</h2><h3 id="1-1-项目描述"><a href="#1-1-项目描述" class="headerlink" title="1.1 项目描述"></a>1.1 项目描述</h3><ol>
+<li>此项目为一个前后台分离的后台管理的 SPA, 包括前端 PC 应用和后端应用</li>
+<li>包括用户管理 / 商品分类管理 / 商品管理 / 权限管理等功能模块</li>
+<li>前端: 使用 React 全家桶 + Antd + Axios + ES6 + Webpack 等技术</li>
+<li>后端: 使用 Node + Express + Mongodb 等技术</li>
+<li>采用模块化、组件化、工程化的模式开发</li>
+</ol>
+<h3 id="1-2-项目功能界面"><a href="#1-2-项目功能界面" class="headerlink" title="1.2 项目功能界面"></a>1.2 项目功能界面</h3><p>在线预览地址：<a target="_blank" rel="noopener" href="http://120.25.207.68:5000/">点击这里</a></p>
+<h3 id="1-3-技术选型"><a href="#1-3-技术选型" class="headerlink" title="1.3 技术选型"></a>1.3 技术选型</h3><p><img src="0.png" alt="技术选型"></p>
+<h3 id="1-4-前端路由"><a href="#1-4-前端路由" class="headerlink" title="1.4 前端路由"></a>1.4 前端路由</h3><p><img src="1.png" alt="路由"></p>
+<h3 id="1-5-项目源码文件结构"><a href="#1-5-项目源码文件结构" class="headerlink" title="1.5 项目源码文件结构"></a>1.5 项目源码文件结构</h3><p><img src="2.png" alt="文件结构"></p>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><h3 id="2-1-npm-yarn-常用命令"><a href="#2-1-npm-yarn-常用命令" class="headerlink" title="2.1 npm/yarn 常用命令"></a>2.1 npm/yarn 常用命令</h3><p>yarn 命令文档：<a target="_blank" rel="noopener" href="https://yarn.bootcss.com/docs/cli/">https://yarn.bootcss.com/docs/cli/</a></p>
+<p>npm 命令文档：<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v8/commands">https://docs.npmjs.com/cli/v8/commands</a></p>
+<p>设置淘宝镜像：</p>
+<p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+<p><code>yarn config set registry https://registry.npm.taobao.org</code></p>
+<p>初始化项目：</p>
+<p><code>yarn init -y</code></p>
+<p><code>npm init -y</code></p>
+<p>下载项目的所有声明的依赖：</p>
+<p><code>yarn install</code></p>
+<p><code>npm install</code></p>
+<p>下载指定的运行时依赖包：</p>
+<p><code>yarn add package-name@3.2.1 </code></p>
+<p><code>npm install package-name@3.2.1 -S</code></p>
+<p>下载指定的开发时依赖:：</p>
+<p><code>yarn add package-name@3.2.1 -D </code></p>
+<p><code>npm install package-name@3.2.1 -D</code></p>
+<p>全局下载指定包：</p>
+<p><code>yarn global add package-name</code></p>
+<p><code>npm install package-name-g</code></p>
+<p>删除依赖包：</p>
+<p><code>yarn remove package-name</code>, <code>yarn global remove package-name</code></p>
+<p><code>npm uninstall package-name</code>, <code>npm uninstall package-name-g</code></p>
+<p>运行项目中配置的 script：</p>
+<p><code>yarn run xxx</code></p>
+<p><code>npm run xxx</code></p>
+<h3 id="2-2-git-常用命令"><a href="#2-2-git-常用命令" class="headerlink" title="2.2 git 常用命令"></a>2.2 git 常用命令</h3><p>Git 在线参考手册：<a target="_blank" rel="noopener" href="http://gitref.justjavac.com/">http://gitref.justjavac.com/</a></p>
+<p><code>git init</code> //初始化生成一个本地仓库<br><code>git add .</code> //添加到暂存区<br><code>git commit –m "message"</code> //提交到本地仓库<br><code>git remote add origin url</code> //关联到远程仓库<br><code>git push origin master</code> //推送本地 master 分支到远程 master 分支<br><code>git checkout -b dev</code> //创建一个开发分支并切换到新分支<br><code>git push origin dev </code> //推送本地 dev 分支到远程 dev 分支<br><code>git clone url</code> //将远程仓库克隆下载到本地<br><code>git checkout -b dev origin/dev</code> // 克隆仓库后切换到 dev 分支<br><code>git pull origin dev</code> //从远程 dev 分支拉取到本地 dev 分支</p>
+<h2 id="3-学习记录"><a href="#3-学习记录" class="headerlink" title="3. 学习记录"></a>3. 学习记录</h2><p>记录一些开发经验和初次使用 React 开发项目时遇到的问题。</p>
+<h3 id="3-1-项目开发相关"><a href="#3-1-项目开发相关" class="headerlink" title="3.1 项目开发相关"></a>3.1 项目开发相关</h3><ul>
+<li><p>封装 axios 请求；配置代理服务器解决 ajax 请求跨域问题；</p>
+</li>
+<li><p>优化了获取默认需要展开的子菜单（适用于多级子菜单，使用了回溯算法）；</p>
+</li>
+<li><p>优化了 Category 组件的编码；在 Category 组件中拆分出两个表单组件；</p>
+</li>
+<li><p>级联选择框默认选中数组 category 好像要在 options 初始化之前填充，否则貌似不生效；</p>
+</li>
+<li><p>添加商品和修改商品共用一个组件，根据是否向路由组件传递 product 对象来展示不同的内容；</p>
+</li>
+<li><p>postman 发送 post 请求时请求体的参数类型一般为 form-urlencoded，上传图片时请求体参数类型为 form-data；</p>
+</li>
+<li><p>上传图片的流程：upload 组件上传图片后将后台生成的 name 属性和 url 属性作为上传文件的 name，url 属性存储起来，url 由前缀加上 name 生成；更新商品时需要默认显示商品图片，商品的 imgs 属性中存储了之前的 name 属性值，由 name 属性值可得到 url，即可展示商品图片；</p>
+</li>
+<li><p>useNavigate 函数式路由跳转适合用于组件渲染后；Navigate 标签式路由跳转适合用于组件渲染之前；</p>
+</li>
+<li><p>函数组件不能给其设置 ref 属性，使用 forwardRef 和 useImperativeHandle 可给函数组件设置 ref 属性，用于父组件获取子组件中的表单数据等；使用 useImperativeHandle 用于子组件向父组件传值；</p>
+</li>
+<li><p>Effect Hook 用法：使用 setInterval 显示当前时间，这是一个需要清除的副作用，（还有其他的比如订阅消息），这些需要清除的副作用可能会变化，举个例子，在组件挂载后订阅好友的状态，并在卸载组件的时候取消订阅，期间我们可能会更新订阅，如果使用 class 定义组件就要在 componentDidUpdate 生命周期中，取消之前的订阅，订阅新的，（这样做的目的是防止引用丢失，类比 setInterval），如果使用 Effect Hook 将清除阶段写在回调函数中就很方便，effect 的清除阶段在每次重新渲染时都会执行，而不是只在卸载组件的时候执行一次；</p>
+</li>
+<li><p>Ref Hook 不仅可以用于 DOM refs。「ref」 对象是一个 current 属性可变且可以容纳任意值的通用容器，类似于一个 class 的实例属性；</p>
+</li>
+<li><p>函数组件内普通变量和 useState 和 useRef 的用法：当变量不会发生变化时使用 var 声明使用即可，当变量会发生变化时使用 useRef，当变量会发生变化且会引起页面内容的变化时使用 useState；</p>
+</li>
+<li><p>setState 在 react 相关的函数中执行是异步的（事务机制？）多次 setState 只会执行一次 render（重新渲染）；其他情况（如定时器）执行是同步的；setState 传入函数时，参数一定是最新的 state；</p>
+</li>
+<li><p>搭建 redux 开发环境：</p>
+</li>
+</ul>
+<ol>
+<li>安装依赖：yarn add redux react-redux redux-thunk redux-devtools-extension；</li>
+<li>在 src 目录下创建 redux 文件夹，并在该文件夹下创建 store, reducer, actions, action-types 这些 js 文件，并初始化代码；</li>
+<li>在项目入口 index.js 文件中引入 Provider 组件并传入 store 属性以应用 redux；</li>
+<li>在 action.js 中创建工厂函数生成 action；用 connect 函数连接 UI 组件和 redux，函数中向 UI 组件中传入 store 中的 state 和 action 中的工厂函数（用于生成 action 并修改 store 中的 state）；</li>
+</ol>
+<ul>
+<li><p>生产环境解决跨域问题：用 webpack 配置代理服务器，将前台的请求转发给代理服务器（与前台端口号相同，不存在跨域问题），由服务器请求后台接口，并将结果返回给前台；</p>
+</li>
+<li><p>开发环境解决跨域问题：</p>
+</li>
+</ul>
+<ol>
+<li>如果前台项目和后台项目独立运行（打包后执行 serve build 运行 build 目录下的前台应用），则使用 nginx 反向代理服务器，访问 nginx 服务器 8889 端口号，服务器会根据请求的路径区分前台路由还是后台路由，但使用 BrowserRouter 时会出现页面刷新时 404 问题；</li>
+<li>如果前台项目打包后和后台项目在同一端口号运行（即将打包后 build 文件夹中的文件放在后台项目 node 的 public 文件夹下），则不存在跨域问题，但是需要解决使用 BrowserRouter 出现的问题。a. 问题：页面刷新时会出现 404 （找不到服务器资源）的错误；b. 原因：项目根路径后的 path 路径会被当作后台路由路径, 去请求对应的后台路由, 但没有相应路由；c. 解决：使用自定义中间件（如果 URL 不匹配任何静态资源，它应提供与你的应用程序中的 index.html 相同的页面）；注：如果使用 BrowserRouter 则不会出现 404 的错误，因为 # 后面的 URL 不会发送到服务器，一直请求的是 / 根路径下资源，服务器返回 index.html ；</li>
+</ol>
+<ul>
+<li><p>使用 redux 遇到的问题：redux 中存储了头部标题的数据 headTitle，点击左侧的菜单项时，头部标题发生相应的变化，但是出现了如下报错：<img src="3.png" alt="Chrome Console"> 报错信息表示在渲染 LeftNav 组件的同时不能更新 Header 组件，要我在正确的位置更新数据 setState()；于是我找到 LeftNav 组件，发现我确实在渲染组件的时候调用了更新 redux 中状态的函数，<code>props.setHeadTitle(title)</code>，而 Header 组件中读取了 redux 中的该状态，所以控制台报这样的错误；于是我采用了另一种方法更新 redux 中的状态：在渲染 LeftNav 组件时先将需要更新的数据使用 useRef()存储起来，然后在 useEffect()中即组件挂载之后更新 redux 中的状态，果然修改之后就没有报错了；</p>
+</li>
+<li><p>使用 jsonp 请求天气信息，暂未实现该功能；</p>
+</li>
+<li><p>存在的 bug：修改用户名后会出现重名的情况；</p>
+</li>
+</ul>
+<h3 id="3-2-部署上线相关"><a href="#3-2-部署上线相关" class="headerlink" title="3.2 部署上线相关"></a>3.2 部署上线相关</h3><ul>
+<li>一个网站部署上线的步骤：</li>
+</ul>
+<ol>
+<li>准备云服务器，Xshell</li>
+<li>用 Xshell 连接远程主机，连接成功后在终端下安装宝塔面板管理服务器；</li>
+<li>在阿里云服务器上开启 3306 端口(mysql),8888 端口(宝塔面板),8889 端口(后台 api 接口)，宝塔面板也要开启 3306 和 8889 端口；</li>
+<li>在宝塔面板创建数据库并导入数据库文件，后台 api 接口文件(修改数据库连接参数、app.js 中监听的端口号 8889)；</li>
+<li>在 pm2 管理器下添加项目用于开启服务器应用，应用启动后用 postman 进行接口测试；</li>
+<li>修改前台应用的请求基准地址，重新打包；在宝塔添加站点并将打包后的文件放在站点的根目录下；</li>
+</ol>
 <blockquote>
-<p>注意：Hexo 发布的文章是 Markdown 格式的文件，需要使用 Markdown 语法进行编写。</p>
+<p>注：这是前后台应用在不同端口运行的做法，这次的项目由于跨域问题前后台应用在同一端口运行。</p>
 </blockquote>
-<p>Markdown 语法自查：<a target="_blank" rel="noopener" href="https://markdown.com.cn/">Markdown 官方教程</a></p>
-<hr>
-<h2 id="文章-Front-matter-配置"><a href="#文章-Front-matter-配置" class="headerlink" title="文章 Front-matter 配置"></a>文章 Front-matter 配置</h2><p>Front-matter 选项中的所有内容均为非必填的。但是建议至少填写 title 和 date 的值。</p>
-<h3 id="基本配置示例"><a href="#基本配置示例" class="headerlink" title="基本配置示例"></a>基本配置示例</h3><pre class=" language-markdown"><code class="language-markdown">title: 使用 Hexo 发布一篇文章
-date: 2021-11-20 21：30：00
-author: Tulong
-img: /source/images/xxx.jpg
-summary: 记录了 Hexo 发布一篇文章的一般流程
-tags:
-
-<span class="token list punctuation">-</span> Hexo
-<span class="token list punctuation">-</span> Markdown
-  categories: 博客
-</code></pre>
-<h3 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h3><p>参见：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md#%E6%96%87%E7%AB%A0-front-matter-%E4%BB%8B%E7%BB%8D">Front-matter 选项详解</a></p>
-<hr>
-<h2 id="用-Markdown-语法编写正文部分"><a href="#用-Markdown-语法编写正文部分" class="headerlink" title="用 Markdown 语法编写正文部分"></a>用 Markdown 语法编写正文部分</h2><p>像这样：<br><img src="0.png" alt="示例"></p>
-<h3 id="在文章中插入图片的方法"><a href="#在文章中插入图片的方法" class="headerlink" title="在文章中插入图片的方法"></a>在文章中插入图片的方法</h3><p><strong><em>1. 在本地引用</em></strong></p>
-<p>绝对路径：当 Hexo 项目中只用到少量图片时，可以将图片统一放在 source/images 文件夹中，通过 markdown 语法访问它们。这种方式引入的图片既可以在首页内容中访问到，也可以在文章正文中访问到。像下面这样引用：</p>
-<p><code>![图片alt](/images/image.jpg "图片title")</code></p>
-<p>相对路径：图片还可以放在文章自己的文件夹中。将 _config.yml 文件中的配置项 post_asset_folder 设为 true 后，执行命令<code>$ hexo new post_name</code>，在 source/_posts 中会生成文章 post_name.md 和同名文件夹 post_name 。将图片资源放在 post_name 中，文章就可以使用相对路径引用图片资源了。像下面这样引入：</p>
-<p><code>![图片alt](image.jpg)</code></p>
-<p>这样引入的图片只能在文章中显示，但无法在首页中正常显示。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。像这样：</p>
-<p><code>{% asset_img image.jpg This is an image %}</code></p>
-<p><strong><em>2. CDN 引用</em></strong></p>
-<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。比如 Cloudinary 提供的图片 CDN 服务，在 Cloudinary 中上传图片后，会生成对应的 url 地址，将地址直接拿来引用即可。</p>
-<hr>
-<h2 id="启动服务器，本地测试"><a href="#启动服务器，本地测试" class="headerlink" title="启动服务器，本地测试"></a>启动服务器，本地测试</h2><p><code>$ hexo server</code></p>
-<hr>
-<h2 id="生成静态文件并部署到-GitHub-上"><a href="#生成静态文件并部署到-GitHub-上" class="headerlink" title="生成静态文件并部署到 GitHub 上"></a>生成静态文件并部署到 GitHub 上</h2><p>想要发布的文章在本地预览无误后，在 Git Bash 命令窗口依次执行如下命令：</p>
-<p><code>$ hexo clean</code></p>
-<p><code>$ hexo generate</code></p>
-<p><code>$ hexo deploy</code></p>
-<p>执行完毕后在浏览器访问自己的博客域名，即可看到刚才发布的文章。</p>
+<ul>
+<li><p>在服务器端将数据导入 mongodb：进入 mongodb 的安装目录，<code>cd /www/server/mongodb/bin</code>，为了方便将 json 文件复制到 bin 目录下，接着将数据导入数据库中，<code>mongoimport -d server_db2 -c categorys --jsonArray categorys.json -u username -p password</code>，参数说明：-d 指明使用的库, 本例中为” server_db2”，-c 指明要导入的表, 本例中为”categorys”，categorys.json 为数据文件，导入数据的时候会隐式创建表结构；导入成功后如下图所示：<img src="4.png">执行 mongo 命令启动服务，执行<code>use server_db2</code>进入 server_db2 数据库，<code>db.auth('username','password')</code>输入用户名和密码以授权，执行<code>db.categorys.find().pretty()</code>来查看表内的数据，可以看到表内确实成功导入了数据；<img src="5.png"></p>
+</li>
+<li><p>部署上线时遇到的问题：</p>
+</li>
+</ul>
+<ol>
+<li>服务器端连接并配置 mongodb；解决方法：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040037436">https://segmentfault.com/a/1190000040037436</a></li>
+<li>一个 ip 怎么部署多个项目；解决方法：<a target="_blank" rel="noopener" href="https://blog.csdn.netweixin_51560103/article/details/121202456">https://blog.csdn.net/weixin_51560103/article/details/121202456</a></li>
+<li>跨域问题；解决方法：前后台应用放在同一端口号运行；使用 nginx 做反向代理也可，不过使用 BrowserRouter 时会出现页面刷新时 404 问题；</li>
+<li>访问网站时 403；<a target="_blank" rel="noopener" href="https://www.idcnote.com/bt/37.html">https://www.idcnote.com/bt/37.html</a></li>
+</ol>
 
                 
             </div>
@@ -515,7 +598,7 @@ tags:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jacob-tu.github.io/2021/blogwriting/">https://jacob-tu.github.io/2021/blogwriting/</a>
+                    <a href="https://jacob-tu.github.io/2022/react-project-summary/">https://jacob-tu.github.io/2022/react-project-summary/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -553,12 +636,16 @@ tags:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
+                                <a href="/tags/React/">
+                                    <span class="chip bg-color">React</span>
                                 </a>
                             
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
+                                <a href="/tags/Antd/">
+                                    <span class="chip bg-color">Antd</span>
+                                </a>
+                            
+                                <a href="/tags/Redux/">
+                                    <span class="chip bg-color">Redux</span>
                                 </a>
                             
                         </div>
@@ -730,50 +817,56 @@ tags:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/vuexnote/">
+                <a href="/2022/react-project-summary/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Vuex Note">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="尚硅谷谷粒后台管理系统">
                         
-                        <span class="card-title">Vuex Note</span>
+                        <span class="card-title">尚硅谷谷粒后台管理系统</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Vuex 的原理和使用
+                            项目总结
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    Web前端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/React/">
+                        <span class="chip bg-color">React</span>
                     </a>
                     
-                    <a href="/tags/Vuex/">
-                        <span class="chip bg-color">Vuex</span>
+                    <a href="/tags/Antd/">
+                        <span class="chip bg-color">Antd</span>
+                    </a>
+                    
+                    <a href="/tags/Redux/">
+                        <span class="chip bg-color">Redux</span>
                     </a>
                     
                 </div>
@@ -787,31 +880,31 @@ tags:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/myfirstblog/">
+                <a href="/2022/flexlayout/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="我的第一篇博客文章">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="flex 布局">
                         
-                        <span class="card-title">我的第一篇博客文章</span>
+                        <span class="card-title">flex 布局</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一篇博客
+                            flex 经典骰子布局
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
+                            <a href="/categories/Web%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    Web前端
                                 </a>
                             
                             
@@ -821,8 +914,12 @@ tags:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/flex/">
+                        <span class="chip bg-color">flex</span>
+                    </a>
+                    
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                 </div>
