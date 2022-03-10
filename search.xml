@@ -33,6 +33,33 @@
     
     
     <entry>
+      <title>快速排序</title>
+      <link href="/2022/quicksort/"/>
+      <url>/2022/quicksort/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>快速排序的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另一部分的所有数据要小，再按这种方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，使整个数据变成有序序列。</p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>排序算法的思想非常简单，在待排序的数列中，我们首先要找一个数字作为基准数。为了方便，我们一般选择第 1 个数字作为基准数（其实选择第几个并没有关系）。接下来我们需要把这个待排序的数列中小于基准数的元素移动到待排序的数列的左边，把大于基准数的元素移动到待排序的数列的右边。这时，左右两个分区的元素就相对有序了；接着把两个分区的元素分别按照上面两种方法继续对每个分区找出基准数，然后移动，直到各个分区只有一个数时为止。</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class=" language-JavaScript"><code class="language-JavaScript">/** * @description 快速排序 * @param {array} arr 待排序数组 * @param {number} begin 数组开始下标 * @param {number} end 数组结束下标 * @return {undefined} */const quickSort = (arr, begin, end) => {  if (begin < end) {    // 选择数组的第一个元素作为基准值    let key = arr[begin];    let i = begin,      j = end;    // 一轮排序开始    while (i < j) {      // 从右边寻找第一个小于基准值的元素并放在基准值左边      while (i < j && arr[j] >= key) {        j--;      }      // 将小于基准值的元素放在左边      if (i < j) {        arr[i] = arr[j];        i++;      }      // 从左边寻找第一个比基准值大的元素并放在基准值右边      while (i < j && arr[i] <= key) {        i++;      }      // 将大于基准值的元素放在右边      if (i < j) {        arr[j] = arr[i];        j--;      }    }    // 将基准值放在最终位置    arr[i] = key;    // 一轮排序结束后将分割成的左右两部分分别递归地进行快速排序    quickSort(arr, begin, i - 1);    quickSort(arr, i + 1, end);  }};const arr = [5, 9, 1, 9, 5, 3, 7, 6, 1, 2, 8, 12, 24, 4];quickSort(arr, 0, arr.length - 1);console.log(arr);</code></pre><p>快速排序的时间复杂度取决于选择的基准值，在一般情况下的时间复杂度为 O(logn) ，最坏的情况是当选择的基准值为数组中最大或最小的元素，因为这种情况下元素最不能被等分为两部分，所以最多要进行 n 次递归，时间复杂度为 O(n^2) 。如果选择最左面或者是最右面的那个元素为基准值，那么最坏情况会在这些情景下发生：</p><ol><li>数组已经是正序排过序的。</li><li>数组已经是倒序排过序的。</li><li>数组中所有的元素都相同。</li></ol><p>为了避免最坏的情况发生我们可以选择一个随机的基准值，或者选择一个分区中间的值作为基准值，或者选择分区的第一个、中间、最后一个元素的中值作为基准值。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>二叉树的遍历</title>
       <link href="/2021/binary-tree-traversal/"/>
       <url>/2021/binary-tree-traversal/</url>
