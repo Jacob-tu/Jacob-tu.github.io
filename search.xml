@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>StepsForm和Modal配合使用</title>
+      <link href="/2022/antd-pro-stepsform/"/>
+      <url>/2022/antd-pro-stepsform/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题描述和解决方案"><a href="#问题描述和解决方案" class="headerlink" title="问题描述和解决方案"></a>问题描述和解决方案</h2><p>最近做项目时遇到了这样的问题，StepsForm 和 Modal 配合使用时，Modal 取消后表单无法不能回到第一步。后来尝试使用 current 参数控制 step，思路是给 StepsForm 中每个 StepForm 配置 onFinish 参数，中间每个 StepForm 提交时 current + 1 跳转到下一步，Modal onCancel 时 current 置为 0；根据官方文档 <img src="0.png" alt="官方文档"> 原本给 StepsForm 配置 onFinish 并返回 true 即可回到第一步，但由于我们使用了 current 控制 step，所以要在最后一个 StepForm 提交时将 current 置为 0；另外还需要自定义 submitter 使之可以返回上一步，具体做法是点击返回上一步按钮时修改 current 状态即可，可参考官方文档(自定义分步表单按钮)：<a href="https://procomponents.ant.design/components/steps-form#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E6%AD%A5%E8%A1%A8%E5%8D%95%E6%8C%89%E9%92%AE">https://procomponents.ant.design/components/steps-form#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E6%AD%A5%E8%A1%A8%E5%8D%95%E6%8C%89%E9%92%AE</a></p><p>最后问题得到了解决。</p><p>codesandbox: <a href="https://codesandbox.io/s/fen-bu-biao-dan-yu-modal-pei-he-shi-yong-forked-djqrss?file=/App.tsx">https://codesandbox.io/s/fen-bu-biao-dan-yu-modal-pei-he-shi-yong-forked-djqrss?file=/App.tsx</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> React </tag>
+            
+            <tag> Antd </tag>
+            
+            <tag> Ant Design Pro </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>尚硅谷谷粒后台管理系统</title>
       <link href="/2022/react-project-summary/"/>
       <url>/2022/react-project-summary/</url>
